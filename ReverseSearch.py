@@ -1,4 +1,6 @@
 from imgurpython import ImgurClient
+from serpapi import GoogleSearch
+
 
 # upload images to imgur
 class UploadImage():
@@ -12,7 +14,21 @@ class UploadImage():
     link = data['link']
     return link
 
+#  search image uploaded to imgur on google using google reverse image search
+class SearchImage():
+  def __init__(self):
+    self.params = {
+        "engine": "google_reverse_image",
+        "google_domain": "google.com",
+        "image_url": "url",
+        "api_key": "f1c8dbfae33655ed3a18405ed3cf53460d7f1725f6d042cb3d17c41e9726d812"
+    }
+    self.client = GoogleSearch(self.params)
 
+  def search(self, image_url: str):
+    self.client.params_dict['image_url'] = image_url
+    data = self.client.get_dict()
+    return data
 
 
 
